@@ -1,0 +1,8 @@
+﻿  Engineer.cpp
+C:\Users\vladi\Documents\StaffDemo\Employee.h(17,6): warning C4091: static : пропускается слева от "Employee::Position", когда ни одна переменная не объявлена
+C:\Users\vladi\Documents\StaffDemo\Engineer.cpp(23,17): warning C4244: return: преобразование "float" в "uint32_t", возможна потеря данных
+C:\Users\vladi\Documents\StaffDemo\Engineer.cpp(38,17): warning C4244: return: преобразование "float" в "uint32_t", возможна потеря данных
+  main.cpp
+C:\Users\vladi\Documents\StaffDemo\Employee.h(17,6): warning C4091: static : пропускается слева от "Employee::Position", когда ни одна переменная не объявлена
+  Создание кода...
+  StaffDemo.vcxproj -> C:\Users\vladi\Documents\StaffDemo\x64\Debug\StaffDemo.exe
