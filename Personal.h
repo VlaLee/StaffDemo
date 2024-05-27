@@ -11,16 +11,17 @@ class Personal : public Employee, public WorkBaseTime {
     uint32_t salary_;
 
     explicit Personal(std::string id, std::string nsp,
-        Position position, uint32_t worktime, uint32_t payment, uint32_t salary);
+        Position position, uint32_t worktime, uint32_t salary);
 
     uint32_t calcBase() override;
     uint32_t calcBonus() override;
+    void printInfo() override;
 };
 
 class Driver final : public Personal {
  public:
-     explicit Driver(std::string id, std::string nsp,
-         Position position, uint32_t worktime, uint32_t payment, uint32_t salary);
+    explicit Driver(std::string id, std::string nsp,
+            Position position, uint32_t worktime, uint32_t salary);
 
     uint32_t calcBonus() override;
     void calc() override;
@@ -30,7 +31,7 @@ class Driver final : public Personal {
 class Cleaner final : public Personal {
  public:
      explicit Cleaner(std::string id, std::string nsp,
-         Position position, uint32_t worktime, uint32_t payment, uint32_t salary);
+         Position position, uint32_t worktime, uint32_t salary);
 
     void calc() override;
     void printInfo() override;

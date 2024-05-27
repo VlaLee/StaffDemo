@@ -5,7 +5,16 @@
 #include "Project.h"
 
 class Factory_Staff {
+ private:
+    std::vector<Employee*> staff_;
+    std::vector<Project*> projects_;
+
+    static Employee::Position getPositionByString(std::string position);
+    Project getProjectById(std::string id);
+
  public:
-     std::vector<Employee*> makeStaff(std::string fileName);
-     std::vector<Project*> makeProjects(std::string fileName);
+    ~Factory_Staff();
+
+    void makeStaff(std::string fileName);
+    void makeProjects(std::string fileName);
 };

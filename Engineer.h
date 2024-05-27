@@ -9,11 +9,12 @@ class Engineer : public Personal, public ProjectBudget {
     Project project_;
 
     explicit Engineer(std::string id, std::string nsp, Position position,
-        uint32_t worktime, uint32_t payment, uint32_t salary, Project project);
+        uint32_t worktime, uint32_t salary, Project project);
 
  public:
-    uint32_t calcBudgetPart(float part, uint32_t budget) override;
+    uint32_t calcBudgetPart(Project project) override;
     void calc() override;
+    void printInfo() override;
 };
 
 class Tester final : public Engineer {
@@ -31,7 +32,7 @@ class Tester final : public Engineer {
 
  public:
     explicit Tester(std::string id, std::string nsp, Position position,
-        uint32_t worktime, uint32_t payment, uint32_t salary, Project project);
+        uint32_t worktime, uint32_t salary, Project project);
 
     uint32_t calcProAdditions() override;
     void printInfo() override;
@@ -47,7 +48,7 @@ class Programmer : public Engineer {
 
  public:
     explicit Programmer(std::string id, std::string nsp, Position position,
-        uint32_t worktime, uint32_t payment, uint32_t salary, Project project);
+        uint32_t worktime, uint32_t salary, Project project);
 
     uint32_t calcProAdditions() override;
     void printInfo() override;
@@ -58,6 +59,9 @@ class TeamLeader final : public Programmer, public Heading {
     static const uint8_t paymentForOneEmployee;
 
  public:
+    explicit TeamLeader(std::string id, std::string nsp, Position position,
+        uint32_t worktime, uint32_t salary, Project project);
+
     uint32_t calcHeads() override;
     void calc() override;
     void printInfo() override;

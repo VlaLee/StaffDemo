@@ -20,13 +20,13 @@ class ProjectManager : public Employee, public Heading, public ProjectBudget  {
 
  public:
     explicit ProjectManager(std::string id, std::string nsp,
-        Position position, uint32_t worktime, uint32_t payment, Project project);
+        Position position, uint32_t worktime, Project project);
 
     explicit ProjectManager(std::string id, std::string nsp,
-        Position position, uint32_t worktime, uint32_t payment);
+        Position position, uint32_t worktime);
 
     uint32_t calcHeads() override;
-    uint32_t calcBudgetPart(float part, uint32_t budget) override;
+    uint32_t calcBudgetPart(Project project) override;
     uint32_t calcProAdditions() override;
     void calc() override;
     void printInfo() override;
@@ -35,10 +35,10 @@ class ProjectManager : public Employee, public Heading, public ProjectBudget  {
 class SeniorManager final : public ProjectManager {
  public:
      explicit SeniorManager(std::string id, std::string nsp, Position position,
-         uint32_t worktime, uint32_t payment, std::vector<Project> projects);
+         uint32_t worktime, std::vector<Project> projects);
 
      uint32_t calcHeads() override;
-     uint32_t calcBudgetPart(float part, uint32_t budget) override;
+     uint32_t calcBudgetPart(Project project) override;
      uint32_t calcProAdditions() override;
      void calc() override;
      void printInfo() override;

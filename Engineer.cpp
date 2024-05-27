@@ -15,23 +15,29 @@ const uint8_t Programmer::finishingWorkAheadPercent = 9;
 const uint8_t TeamLeader::paymentForOneEmployee = 50;
 
 Engineer::Engineer(std::string id, std::string nsp, Position position,
-    uint32_t worktime, uint32_t payment, uint32_t salary, Project project)
-    : Personal(id, nsp, position, worktime, payment, salary), project_(project) { }
+    uint32_t worktime, uint32_t salary, Project project)
+    : Personal(id, nsp, position, worktime, salary), project_(project) { }
 
-uint32_t Engineer::calcBudgetPart(float part, uint32_t budget) {
+uint32_t Engineer::calcBudgetPart(Project project) {
+    float part = static_cast<float>(project.getBudget()) / project.getNumberOfEmployees();
+
     //  стандартное математическое округление
-    return round(part * budget);
+    return round(part);
 }
 
 void Engineer::calc() {
-    float part = static_cast<float>(project_.getBudget()) / project_.getNumberOfEmployees();
-    payment_ = calcBase() + calcBudgetPart(part, project_.getBudget())
+    payment_ = calcBase() + calcBudgetPart(project_)
         + calcProAdditions() + calcBonus();
 }
 
+void Engineer::printInfo() {
+    Personal::printInfo();
+    std::cout << "Project [id]: " << project_.getProjectId();
+}
+
 Tester::Tester(std::string id, std::string nsp, Position position,
-    uint32_t worktime, uint32_t payment, uint32_t salary, Project project)
-    : Engineer(id, nsp, position, worktime, payment, salary, project) { }
+    uint32_t worktime, uint32_t salary, Project project)
+    : Engineer(id, nsp, position, worktime, salary, project) { }
 
 uint32_t Tester::getErrorNumber() {
     //  стандартное математическое округление
@@ -43,12 +49,12 @@ uint32_t Tester::calcProAdditions() {
 }
 
 void Tester::printInfo() {
-    std::cout << payment_ << std::endl;
+    Engineer::printInfo();
 }
 
 Programmer::Programmer(std::string id, std::string nsp, Position position,
-    uint32_t worktime, uint32_t payment, uint32_t salary, Project project)
-    : Engineer(id, nsp, position, worktime, payment, salary, project) { }
+    uint32_t worktime, uint32_t salary, Project project)
+    : Engineer(id, nsp, position, worktime, salary, project) { }
 
 uint32_t Programmer::calcProAdditions() {
     //  случайно генерируем число в пределах [1, 100]
@@ -58,8 +64,12 @@ uint32_t Programmer::calcProAdditions() {
 }
 
 void Programmer::printInfo() {
-
+    Engineer::printInfo();
 }
+
+TeamLeader::TeamLeader(std::string id, std::string nsp, Position position,
+    uint32_t worktime, uint32_t salary, Project project)
+    : Programmer(id, nsp, position, worktime, salary, project) { }
 
 uint32_t TeamLeader::calcHeads() {
     return TeamLeader::paymentForOneEmployee * project_.getNumberOfEmployees();
@@ -72,5 +82,5 @@ void TeamLeader::calc() {
 }
 
 void TeamLeader::printInfo() {
-
+    Programmer::printInfo();
 }

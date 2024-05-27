@@ -8,7 +8,6 @@ class Employee {
     static enum Position {
         DRIVER,
         CLEANER,
-        ENGINEER,
         TESTER,
         PROGRAMMER,
         PROJECT_MANAGER,
@@ -23,8 +22,10 @@ class Employee {
     uint32_t worktime_;
     uint32_t payment_;
 
+    std::string getPosition();
+
     explicit Employee(std::string id, std::string nsp,
-        Position position, uint32_t worktime, uint32_t payment);
+        Position position, uint32_t worktime);
 
  public:
     void setWorkTime(uint32_t worktime);
