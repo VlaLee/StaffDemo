@@ -14,7 +14,7 @@ class Factory_Staff {
 
  public:
     ~Factory_Staff();
-
+    
     void makeStaff(std::string fileName);
     void makeProjects(std::string fileName);
     void calcSalaries();

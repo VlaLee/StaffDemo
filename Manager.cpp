@@ -75,7 +75,7 @@ uint32_t SeniorManager::calcProAdditions() {
 
 void SeniorManager::calc() {
     payment_ = calcHeads() + calcProAdditions();
-
+    
     //  доплата за каждый взятый сеньор-менеджером проект
     for (const auto& project : projects_) {
         payment_ += calcBudgetPart(project);

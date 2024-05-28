@@ -11,7 +11,7 @@
 class ProjectManager : public Employee, public Heading, public ProjectBudget  {
  private:
     static const uint8_t maxProjectsCount;
-
+    
  protected:
     //  плата менеджерам за каждого работника, учавствующего в проекте
     static const uint8_t paymentForOneEmployee;

@@ -97,7 +97,6 @@ void Factory_Staff::makeStaff(std::string fileName) {
 
             std::vector<Project> projects;
             while (ist >> projectId) {
-                std::cout << projectId << '\n';
                 projects.push_back(getProjectById(projectId));
             }
 
@@ -177,75 +176,12 @@ void Factory_Staff::makeProjects(std::string fileName) {
 void Factory_Staff::calcSalaries() {
     for (const auto& employee : staff_) {
         employee->calc();
-        /*
-        //  используем dynamic_cast, чтобы использовать правильную версию calc()
-        if (employee->getPosition() == Employee::CLEANER) {
-            Cleaner* cleaner = dynamic_cast<Cleaner*>(employee);
-            if (cleaner == nullptr) std::cout << "|N\n";
-            cleaner->calc();
-            std::cout << "ABOBA\n";
-        }
-        else if (employee->getPosition() == Employee::DRIVER) {
-            Driver* driver = dynamic_cast<Driver*>(employee);
-            driver->calc();
-        }
-        else if (employee->getPosition() == Employee::TESTER) {
-            Tester* tester = dynamic_cast<Tester*>(employee);
-            tester->calc();
-        }
-        else if (employee->getPosition() == Employee::PROGRAMMER) {
-            Programmer* programmer = dynamic_cast<Programmer*>(employee);
-            programmer->calc();
-        }
-        else if (employee->getPosition() == Employee::TEAM_LEADER) {
-            TeamLeader* teamLeader = dynamic_cast<TeamLeader*>(employee);
-            teamLeader->calc();
-        }
-        else if (employee->getPosition() == Employee::PROJECT_MANAGER) {
-            ProjectManager* projectManager = dynamic_cast<ProjectManager*>(employee);
-            projectManager->calc();
-        }
-        else if (employee->getPosition() == Employee::SENIOR_MANAGER) {
-            SeniorManager* seniorManager = dynamic_cast<SeniorManager*>(employee);
-            seniorManager->calc();
-        }*/
     }
 }
 
 void Factory_Staff::printInfo() {
     for (const auto& employee : staff_) {
         employee->printInfo();
-        /*
-        //  используем dynamic_cast, чтобы использовать правильную версию printInfo()
-        if (employee->getPosition() == Employee::CLEANER) {
-            Cleaner* cleaner = dynamic_cast<Cleaner*>(employee);
-            cleaner->printInfo();
-        }
-        else if (employee->getPosition() == Employee::DRIVER) {
-            Driver* driver = dynamic_cast<Driver*>(employee);
-            driver->printInfo();
-        }
-        else if (employee->getPosition() == Employee::TESTER) {
-            Tester* tester = dynamic_cast<Tester*>(employee);
-            tester->printInfo();
-        }
-        else if (employee->getPosition() == Employee::PROGRAMMER) {
-            Programmer* programmer = dynamic_cast<Programmer*>(employee);
-            programmer->printInfo();
-        }
-        else if (employee->getPosition() == Employee::TEAM_LEADER) {
-            TeamLeader* teamLeader = dynamic_cast<TeamLeader*>(employee);
-            teamLeader->printInfo();
-        }
-        else if (employee->getPosition() == Employee::PROJECT_MANAGER) {
-            ProjectManager* projectManager = dynamic_cast<ProjectManager*>(employee);
-            projectManager->printInfo();
-        }
-        else if (employee->getPosition() == Employee::SENIOR_MANAGER) {
-            SeniorManager* seniorManager = dynamic_cast<SeniorManager*>(employee);
-            seniorManager->printInfo();
-        }
-        */
 
         //  разделитель
         std::cout << "\n====================================================\n";

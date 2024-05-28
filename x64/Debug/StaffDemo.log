@@ -1,7 +1,3 @@
-﻿  Manager.cpp
+﻿  Factory.cpp
 C:\Users\vladi\Documents\StaffDemo\Employee.h(16,6): warning C4091: static : пропускается слева от "Employee::Position", когда ни одна переменная не объявлена
-C:\Users\vladi\Documents\StaffDemo\Manager.cpp(32,17): warning C4244: return: преобразование "float" в "uint32_t", возможна потеря данных
-  Personal.cpp
-C:\Users\vladi\Documents\StaffDemo\Employee.h(16,6): warning C4091: static : пропускается слева от "Employee::Position", когда ни одна переменная не объявлена
-  Создание кода...
   StaffDemo.vcxproj -> C:\Users\vladi\Documents\StaffDemo\x64\Debug\StaffDemo.exe

@@ -7,7 +7,7 @@ int main() {
     srand(time(nullptr));
     
     Factory_Staff staff;
-
+    
     staff.makeProjects("projects_info.txt");
     staff.makeStaff("staff_info.txt");
 
