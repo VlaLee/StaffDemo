@@ -1,12 +1,18 @@
 #include <iostream>
+#include <cstdlib>
 
-#include "Engineer.h"
+#include "Factory.h"
 
 int main() {
-    Project project("123", 10000, 5);
-    Tester c("1212312", "Oleg", Employee::TESTER, 32, 50, project);
-    c.calc();
-    c.printInfo();
+    srand(time(nullptr));
+    
+    Factory_Staff staff;
+
+    staff.makeProjects("projects_info.txt");
+    staff.makeStaff("staff_info.txt");
+
+    staff.calcSalaries();
+    staff.printInfo();
 
     return 0;
 }

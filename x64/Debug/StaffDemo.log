@@ -1,14 +1,6 @@
-﻿  Engineer.cpp
+﻿  Manager.cpp
 C:\Users\vladi\Documents\StaffDemo\Employee.h(16,6): warning C4091: static : пропускается слева от "Employee::Position", когда ни одна переменная не объявлена
-C:\Users\vladi\Documents\StaffDemo\Engineer.cpp(25,17): warning C4244: return: преобразование "float" в "uint32_t", возможна потеря данных
-C:\Users\vladi\Documents\StaffDemo\Engineer.cpp(44,17): warning C4244: return: преобразование "float" в "uint32_t", возможна потеря данных
-  Factory.cpp
-C:\Users\vladi\Documents\StaffDemo\Employee.h(16,6): warning C4091: static : пропускается слева от "Employee::Position", когда ни одна переменная не объявлена
-  main.cpp
-C:\Users\vladi\Documents\StaffDemo\Employee.h(16,6): warning C4091: static : пропускается слева от "Employee::Position", когда ни одна переменная не объявлена
-  Manager.cpp
-C:\Users\vladi\Documents\StaffDemo\Employee.h(16,6): warning C4091: static : пропускается слева от "Employee::Position", когда ни одна переменная не объявлена
-C:\Users\vladi\Documents\StaffDemo\Manager.cpp(30,17): warning C4244: return: преобразование "double" в "uint32_t", возможна потеря данных
+C:\Users\vladi\Documents\StaffDemo\Manager.cpp(32,17): warning C4244: return: преобразование "float" в "uint32_t", возможна потеря данных
   Personal.cpp
 C:\Users\vladi\Documents\StaffDemo\Employee.h(16,6): warning C4091: static : пропускается слева от "Employee::Position", когда ни одна переменная не объявлена
   Создание кода...

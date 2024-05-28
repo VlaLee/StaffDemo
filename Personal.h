@@ -30,7 +30,7 @@ class Driver final : public Personal {
 
 class Cleaner final : public Personal {
  public:
-     explicit Cleaner(std::string id, std::string nsp,
+    explicit Cleaner(std::string id, std::string nsp,
          Position position, uint32_t worktime, uint32_t salary);
 
     void calc() override;

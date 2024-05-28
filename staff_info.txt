@@ -1,0 +1,19 @@
+24493 Varakin Vladislav Dmitrievich Cleaner 70 15
+20010 Vystavkin Konstatin Maksimovich Programmer 100 35 2444831
+20017 Shmelev Alexey Sergeevich Team_leader 150 65 2444831
+8331 Kasimov Teiquk Elmanovich Driver 100 30
+20040 Adrianov Oleg Olegovich Programmer 75 35 2444831
+20057 Muchatov George Dmitrievich Tester 100 35 2444831
+10019 Pavlov Yuriy Pavlovich Programmer 30 25 2444831
+3440517 Grigoriev Maxim Maximovich Project_manager 65 2444831
+942892 Sazonov Artyom Vladimirovich Cleaner 150 20
+798761 Griboedov Vladislav Rustamovich Project_manager 130 4447
+344057 Puchaev Ilya Evgenievich Programmer 100 35 4447
+322059 Guchin Matvey Viktorovich Programmer 75 35 4447
+1113256 Volkin Seraphim Albertovich Tester 140 35 124421
+187822209 Krasnov Denis Petrovich Programmer 80 35 124421
+28378211 Shubukina Anna Anatolievna Project_manager 85 124421
+1114 Antonov Timofey Valerievich Driver 200 40
+14498123 Savin Lev Igorevich Team_leader 100 55 124421
+17423610 Shubin Daniil Andreevich Programmer 90 40 124421
+17750 Borodin Alexandr Michailovich Senior_manager 250 2444831 4447 124421

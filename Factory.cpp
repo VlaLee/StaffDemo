@@ -68,78 +68,82 @@ void Factory_Staff::makeStaff(std::string fileName) {
         std::exit(-3);
     }
 
-    while (!file.eof()) {
-        std::string line;
-        std::getline(file, line);
+    std::string line;
+
+    while (std::getline(file, line)) {
         std::istringstream ist(line);
 
-        std::string temp_id, temp_surname, temp_name,
-            temp_patronymic, temp_position_str;
-        ist >> temp_id >> temp_surname >> temp_name >> temp_patronymic >> temp_position_str;
+        std::string id, surname, name,
+            patronymic, position_str;
+        ist >> id >> surname >> name >> patronymic >> position_str;
         
-        std::string temp_nsp = temp_surname + " " + temp_name + " " + temp_patronymic;
-        Employee::Position temp_position = Factory_Staff::getPositionByString(temp_position_str);
+        std::string nsp = surname + " " + name + " " + patronymic;
+        Employee::Position position = Factory_Staff::getPositionByString(position_str);
 
-        Employee* temp_employee;
+        Employee* employee;
 
-        if (temp_position == Employee::PROJECT_MANAGER) {
-            uint32_t temp_worktime;
-            std::string temp_projectId;
-            ist >> temp_worktime >> temp_projectId;
+        if (position == Employee::PROJECT_MANAGER) {
+            uint32_t worktime;
+            std::string projectId;
+            ist >> worktime >> projectId;
 
-            temp_employee = new ProjectManager(temp_id, temp_nsp, temp_position,
-                temp_worktime, getProjectById(temp_projectId));
+            employee = new ProjectManager(id, nsp, position,
+                worktime, getProjectById(projectId));
         }
-        else if (temp_position == Employee::SENIOR_MANAGER) {
-            uint32_t temp_worktime;
-            std::string temp_projectId;
-            ist >> temp_worktime;
+        else if (position == Employee::SENIOR_MANAGER) {
+            uint32_t worktime;
+            std::string projectId;
+            ist >> worktime;
 
-            std::vector<Project> temp_projects;
-            while (ist >> temp_projectId) {
-                temp_projects.push_back(getProjectById(temp_projectId));
+            std::vector<Project> projects;
+            while (ist >> projectId) {
+                std::cout << projectId << '\n';
+                projects.push_back(getProjectById(projectId));
             }
-        }
-        else if (temp_position == Employee::CLEANER) {
-            uint32_t temp_worktime, temp_salary;
-            ist >> temp_worktime >> temp_salary;
 
-            temp_employee = new Driver(temp_id, temp_nsp, temp_position,
-                temp_worktime, temp_salary);
+            employee = new SeniorManager(id, nsp, position,
+                worktime, projects);
         }
-        else if (temp_position == Employee::DRIVER) {
-            uint32_t temp_worktime, temp_salary;
-            ist >> temp_worktime >> temp_salary;
+        else if (position == Employee::CLEANER) {
+            uint32_t worktime, salary;
+            ist >> worktime >> salary;
 
-            temp_employee = new Cleaner(temp_id, temp_nsp, temp_position,
-                temp_worktime, temp_salary);
+            employee = new Cleaner(id, nsp, position,
+                worktime, salary);
         }
-        else if (temp_position == Employee::PROGRAMMER) {
-            uint32_t temp_worktime, temp_salary;
-            std::string temp_projectId;
-            ist >> temp_worktime >> temp_salary >> temp_projectId;
+        else if (position == Employee::DRIVER) {
+            uint32_t worktime, salary;
+            ist >> worktime >> salary;
 
-            temp_employee = new Programmer(temp_id, temp_nsp, temp_position,
-                temp_worktime, temp_salary, getProjectById(temp_projectId));
+            employee = new Driver(id, nsp, position,
+                worktime, salary);
         }
-        else if (temp_position == Employee::TESTER) {
-            uint32_t temp_worktime, temp_salary;
-            std::string temp_projectId;
-            ist >> temp_worktime >> temp_salary >> temp_projectId;
+        else if (position == Employee::PROGRAMMER) {
+            uint32_t worktime, salary;
+            std::string projectId;
+            ist >> worktime >> salary >> projectId;
 
-            temp_employee = new Tester(temp_id, temp_nsp, temp_position,
-                temp_worktime, temp_salary, getProjectById(temp_projectId));
+            employee = new Programmer(id, nsp, position,
+                worktime, salary, getProjectById(projectId));
         }
-        else if (temp_position == Employee::TEAM_LEADER) {
-            uint32_t temp_worktime, temp_salary;
-            std::string temp_projectId;
-            ist >> temp_worktime >> temp_salary >> temp_projectId;
+        else if (position == Employee::TESTER) {
+            uint32_t worktime, salary;
+            std::string projectId;
+            ist >> worktime >> salary >> projectId;
 
-            temp_employee = new TeamLeader(temp_id, temp_nsp, temp_position,
-                temp_worktime, temp_salary, getProjectById(temp_projectId));
+            employee = new Tester(id, nsp, position,
+                worktime, salary, getProjectById(projectId));
+        }
+        else if (position == Employee::TEAM_LEADER) {
+            uint32_t worktime, salary;
+            std::string projectId;
+            ist >> worktime >> salary >> projectId;
+
+            employee = new TeamLeader(id, nsp, position,
+                worktime, salary, getProjectById(projectId));
         }
 
-        staff_.push_back(temp_employee);
+        staff_.push_back(employee);
     }
 
     file.close();
@@ -153,19 +157,97 @@ void Factory_Staff::makeProjects(std::string fileName) {
         std::exit(-3);
     }
 
-    while (!file.eof()) {
-        std::string line;
-        std::getline(file, line);
+    std::string line;
+
+    while (std::getline(file, line)) {
         std::istringstream ist(line);
 
-        std::string temp_id;
-        uint32_t temp_budget, temp_numberOfEmployees;
-        ist >> temp_id >> temp_budget >> temp_numberOfEmployees;
+        std::string id;
+        uint32_t budget, numberOfEmployees;
+        ist >> id >> budget >> numberOfEmployees;
 
-        Project* temp_project = new Project(temp_id, temp_budget, temp_numberOfEmployees);
+        Project* project = new Project(id, budget, numberOfEmployees);
         
-        projects_.push_back(temp_project);
+        projects_.push_back(project);
     }
 
     file.close();
+}
+
+void Factory_Staff::calcSalaries() {
+    for (const auto& employee : staff_) {
+        employee->calc();
+        /*
+        //  используем dynamic_cast, чтобы использовать правильную версию calc()
+        if (employee->getPosition() == Employee::CLEANER) {
+            Cleaner* cleaner = dynamic_cast<Cleaner*>(employee);
+            if (cleaner == nullptr) std::cout << "|N\n";
+            cleaner->calc();
+            std::cout << "ABOBA\n";
+        }
+        else if (employee->getPosition() == Employee::DRIVER) {
+            Driver* driver = dynamic_cast<Driver*>(employee);
+            driver->calc();
+        }
+        else if (employee->getPosition() == Employee::TESTER) {
+            Tester* tester = dynamic_cast<Tester*>(employee);
+            tester->calc();
+        }
+        else if (employee->getPosition() == Employee::PROGRAMMER) {
+            Programmer* programmer = dynamic_cast<Programmer*>(employee);
+            programmer->calc();
+        }
+        else if (employee->getPosition() == Employee::TEAM_LEADER) {
+            TeamLeader* teamLeader = dynamic_cast<TeamLeader*>(employee);
+            teamLeader->calc();
+        }
+        else if (employee->getPosition() == Employee::PROJECT_MANAGER) {
+            ProjectManager* projectManager = dynamic_cast<ProjectManager*>(employee);
+            projectManager->calc();
+        }
+        else if (employee->getPosition() == Employee::SENIOR_MANAGER) {
+            SeniorManager* seniorManager = dynamic_cast<SeniorManager*>(employee);
+            seniorManager->calc();
+        }*/
+    }
+}
+
+void Factory_Staff::printInfo() {
+    for (const auto& employee : staff_) {
+        employee->printInfo();
+        /*
+        //  используем dynamic_cast, чтобы использовать правильную версию printInfo()
+        if (employee->getPosition() == Employee::CLEANER) {
+            Cleaner* cleaner = dynamic_cast<Cleaner*>(employee);
+            cleaner->printInfo();
+        }
+        else if (employee->getPosition() == Employee::DRIVER) {
+            Driver* driver = dynamic_cast<Driver*>(employee);
+            driver->printInfo();
+        }
+        else if (employee->getPosition() == Employee::TESTER) {
+            Tester* tester = dynamic_cast<Tester*>(employee);
+            tester->printInfo();
+        }
+        else if (employee->getPosition() == Employee::PROGRAMMER) {
+            Programmer* programmer = dynamic_cast<Programmer*>(employee);
+            programmer->printInfo();
+        }
+        else if (employee->getPosition() == Employee::TEAM_LEADER) {
+            TeamLeader* teamLeader = dynamic_cast<TeamLeader*>(employee);
+            teamLeader->printInfo();
+        }
+        else if (employee->getPosition() == Employee::PROJECT_MANAGER) {
+            ProjectManager* projectManager = dynamic_cast<ProjectManager*>(employee);
+            projectManager->printInfo();
+        }
+        else if (employee->getPosition() == Employee::SENIOR_MANAGER) {
+            SeniorManager* seniorManager = dynamic_cast<SeniorManager*>(employee);
+            seniorManager->printInfo();
+        }
+        */
+
+        //  разделитель
+        std::cout << "\n====================================================\n";
+    }
 }

@@ -20,7 +20,7 @@ void Personal::printInfo() {
     std::cout << getPosition() << " " << nsp_ << " [" << id_ << "]:\n";
     std::cout << "Salary: " << salary_ << '\n';
     std::cout << "Total worktime: " << worktime_ << '\n';
-    std::cout << "Total payment: " << payment_ << '\n';
+    std::cout << "Total payment: " << payment_ << "$";
 }
 
 Driver::Driver(std::string id, std::string nsp,
@@ -30,6 +30,7 @@ Driver::Driver(std::string id, std::string nsp,
 uint32_t Driver::calcBonus() {
     // считаем, что четверть рабочего времени
     // водитель работал в ночное время
+    // и получает за это доп оплату в размере почасовой зарплаты
     return salary_ * worktime_ / 4;
 }
 

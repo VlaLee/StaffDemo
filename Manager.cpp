@@ -21,7 +21,8 @@ ProjectManager::ProjectManager(std::string id, std::string nsp,
 }
 
 uint32_t ProjectManager::calcHeads() {
-    return ProjectManager::paymentForOneEmployee * projects_[0].getNumberOfEmployees();
+    //  доплата за каждого работника, не считая самого менеджера
+    return ProjectManager::paymentForOneEmployee * (projects_[0].getNumberOfEmployees() - 1);
 }
 
 uint32_t ProjectManager::calcBudgetPart(Project project) {
@@ -42,8 +43,8 @@ void ProjectManager::calc() {
 void ProjectManager::printInfo() {
     std::cout << getPosition() << " " << nsp_ << " [" << id_ << "]:\n";
     std::cout << "Total worktime: " << worktime_ << '\n';
-    std::cout << "Total payment: " << payment_ << '\n';
-    std::cout << "Project [id]: " << projects_[0].getProjectId() << '\n';
+    std::cout << "Total payment: " << payment_ << "$\n";
+    std::cout << "Project [id]: " << projects_[0].getProjectId();
 }
 
 SeniorManager::SeniorManager(std::string id, std::string nsp, Position position,
@@ -57,7 +58,8 @@ SeniorManager::SeniorManager(std::string id, std::string nsp, Position position,
 uint32_t SeniorManager::calcHeads() {
     uint32_t sum = 0;
     for (const auto& project : projects_) {
-        sum += SeniorManager::paymentForOneEmployee * project.getNumberOfEmployees();
+        //  доплата за каждого работника, не считая самого сеньор-менеджера
+        sum += SeniorManager::paymentForOneEmployee * (project.getNumberOfEmployees() - 1);
     }
 
     return sum;
@@ -83,13 +85,11 @@ void SeniorManager::calc() {
 void SeniorManager::printInfo() {
     std::cout << getPosition() << " " << nsp_ << " [" << id_ << "]:\n";
     std::cout << "Total worktime: " << worktime_ << '\n';
-    std::cout << "Total payment: " << payment_ << '\n';
+    std::cout << "Total payment: " << payment_ << "$\n";
     std::cout << "Projects [ids]:";
     
     //  вывод id проектов
     for (const auto& project : projects_) {
         std::cout << " " << project.getProjectId();
     }
-
-    std::cout << '\n';
 }

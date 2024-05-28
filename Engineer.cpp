@@ -32,7 +32,9 @@ void Engineer::calc() {
 
 void Engineer::printInfo() {
     Personal::printInfo();
-    std::cout << "Project [id]: " << project_.getProjectId();
+
+    // '\n' символ, потому что нет переноса на новую строку в конце Personal::printInfo()
+    std::cout << "\nProject [id]: " << project_.getProjectId();
 }
 
 Tester::Tester(std::string id, std::string nsp, Position position,
